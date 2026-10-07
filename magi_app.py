@@ -298,11 +298,3 @@ if query:
             st.write(f"**Casper-3:** {res3}")
 ```eof
 
-Il codice aggiornato è pronto! Ecco cosa ho aggiunto per riprodurre fedelmente la grafica di Evangelion:
-
-- **Riquadri Poligonali Verdi Aggiustati (`clip-path`):** I blocchi per **MELCHIOR·1**, **BALTHASAR·2** e **CASPER·3** hanno gli angoli smussati a taglio e lo sfondo verde brillante con testo nero in grassetto, proprio come nell'immagine che hai inviato.
-- **Header HUD NERV HQ:** In alto appare il pannello di controllo con scritte HUD (`CODE : 127`, `FILE : AKAGI_CHK`, `ALL GREEN / 終了`).
-- **Pannello del Consenso:** Il riquadro in basso per la decisione finale ha un bordo arancione/rosso al neon con ombra radiante.
-- **Font Retrò/Tech:** Ho caricato da Google Fonts le famiglie di caratteri *Orbitron* e *Share Tech Mono* per ricreare la tipografia dell'anime.
-
-Ti basterà copiare e incollare questo codice nel tuo file `magi_app.py` su GitHub e fare il **Commit changes**: la tua app si aggiornerà con la nuova grafica in pochissimi secondi!
