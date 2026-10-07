@@ -3,7 +3,7 @@ from openai import OpenAI
 
 st.set_page_config(page_title="MAGI System Terminal", layout="wide")
 
-st.title("🔴 MAGI SYSTEM - Terminale Decisionale (Free Edition)")
+st.title("🔴 MAGI SYSTEM - Terminale Decisionale")
 st.markdown("---")
 
 OPENROUTER_API_KEY = st.sidebar.text_input("OpenRouter API Key (Gratuita)", type="password")
@@ -28,7 +28,7 @@ def risposta_ia(model_name, prompt):
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
-        return f"Errore con {model_name}: {str(e)}"
+        return f"Errore: {str(e)}"
 
 if query:
     if not OPENROUTER_API_KEY:
@@ -38,27 +38,27 @@ if query:
         
         col1, col2, col3 = st.columns(3)
         
-        # Agente 1: Llama 3.3 70B (Gratuito)
+        # Agente 1: Melchior (Auto Free Router / Gemma 4)
         with col1:
-            st.subheader("MELCHIOR (Llama 3.3)")
+            st.subheader("MELCHIOR")
             with st.status("Elaborazione...", expanded=True):
-                res1 = risposta_ia("meta-llama/llama-3.3-70b-instruct:free", query)
+                res1 = risposta_ia("google/gemma-4-31b-it:free", query)
                 st.write(res1)
                 st.success("Completato")
 
-        # Agente 2: Mistral Small (Gratuito)
+        # Agente 2: Balthasar (Auto Free Router / Nemotron Super)
         with col2:
-            st.subheader("BALTHASAR (Mistral Small)")
+            st.subheader("BALTHASAR")
             with st.status("Elaborazione...", expanded=True):
-                res2 = risposta_ia("mistralai/mistral-small-24b-instruct-2501:free", query)
+                res2 = risposta_ia("nvidia/nemotron-3-super-120b-a12b:free", query)
                 st.write(res2)
                 st.success("Completato")
 
-        # Agente 3: Qwen 2.5 72B (Gratuito)
+        # Agente 3: Casper (OpenRouter Auto Free)
         with col3:
-            st.subheader("CASPER (Qwen 2.5)")
+            st.subheader("CASPER")
             with st.status("Elaborazione...", expanded=True):
-                res3 = risposta_ia("qwen/qwen-2.5-72b-instruct:free", query)
+                res3 = risposta_ia("openrouter/free", query)
                 st.write(res3)
                 st.success("Completato")
 
@@ -80,11 +80,12 @@ if query:
             3. Fornisci la RISPOSTA DEFINITIVA validata dal sistema.
             """
             
-            # Giudice Gratuito
-            verdetto = risposta_ia("meta-llama/llama-3.3-70b-instruct:free", judge_prompt)
+            verdetto = risposta_ia("openrouter/free", judge_prompt)
             st.markdown(verdetto)
 
         with st.expander("Visualizza risposte grezze per debugging"):
             st.write(f"**Melchior:** {res1}")
             st.write(f"**Balthasar:** {res2}")
             st.write(f"**Casper:** {res3}")
+      
+      
