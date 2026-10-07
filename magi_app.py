@@ -296,5 +296,4 @@ if query:
             st.write(f"**Melchior-1:** {res1}")
             st.write(f"**Balthasar-2:** {res2}")
             st.write(f"**Casper-3:** {res3}")
-```eof
 
