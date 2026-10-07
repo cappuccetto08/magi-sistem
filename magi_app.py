@@ -3,7 +3,7 @@ from openai import OpenAI
 
 st.set_page_config(page_title="MAGI System Terminal", layout="wide")
 
-st.title("🔴 MAGI SYSTEM - Terminale Decisionale")
+st.title("🔴 MAGI SYSTEM - Terminale Decisionale (Free Edition)")
 st.markdown("---")
 
 OPENROUTER_API_KEY = st.sidebar.text_input("OpenRouter API Key (Gratuita)", type="password")
@@ -38,29 +38,33 @@ if query:
         
         col1, col2, col3 = st.columns(3)
         
+        # Agente 1: Llama 3.3 70B (Gratuito)
         with col1:
-            st.subheader("MELCHIOR (Llama 3)")
+            st.subheader("MELCHIOR (Llama 3.3)")
             with st.status("Elaborazione...", expanded=True):
-                res1 = risposta_ia("meta-llama/llama-3-8b-instruct:free", query)
+                res1 = risposta_ia("meta-llama/llama-3.3-70b-instruct:free", query)
                 st.write(res1)
                 st.success("Completato")
 
+        # Agente 2: Mistral Small (Gratuito)
         with col2:
-            st.subheader("BALTHASAR (Mistral)")
+            st.subheader("BALTHASAR (Mistral Small)")
             with st.status("Elaborazione...", expanded=True):
-                res2 = risposta_ia("mistralai/mistral-7b-instruct:free", query)
+                res2 = risposta_ia("mistralai/mistral-small-24b-instruct-2501:free", query)
                 st.write(res2)
                 st.success("Completato")
 
+        # Agente 3: Qwen 2.5 72B (Gratuito)
         with col3:
-            st.subheader("CASPER (Gemma)")
+            st.subheader("CASPER (Qwen 2.5)")
             with st.status("Elaborazione...", expanded=True):
-                res3 = risposta_ia("google/gemma-2-9b-it:free", query)
+                res3 = risposta_ia("qwen/qwen-2.5-72b-instruct:free", query)
                 st.write(res3)
                 st.success("Completato")
 
         st.markdown("---")
 
+        # --- FASE DI VALUTAZIONE DEL CONSENSO (GIUDICE) ---
         st.subheader("⚖️ Valutazione del Consenso")
         with st.spinner("Confronto delle risposte in corso..."):
             judge_prompt = f"""
@@ -76,7 +80,8 @@ if query:
             3. Fornisci la RISPOSTA DEFINITIVA validata dal sistema.
             """
             
-            verdetto = risposta_ia("meta-llama/llama-3-8b-instruct:free", judge_prompt)
+            # Giudice Gratuito
+            verdetto = risposta_ia("meta-llama/llama-3.3-70b-instruct:free", judge_prompt)
             st.markdown(verdetto)
 
         with st.expander("Visualizza risposte grezze per debugging"):
